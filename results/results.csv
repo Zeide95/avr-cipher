@@ -1,0 +1,7 @@
+variant,label,enc_cpb,dec_cpb,setup_cycles,flash_bytes,ram_bytes,tests_ok,margin_pct,balance
+speck_c,SPECK64/128 (C),855.16,885.16,8241,866,108,yes,25.93,3.03
+speck_asm,SPECK64/128 (asm),128.91,139.54,8241,1544,108,yes,25.93,20.11
+present_naive,PRESENT-80 (naive),22468.54,22297.66,27217,1240,256,yes,16.13,0.07
+present_opt,PRESENT-80 (tables+LPM),1769.66,2702.16,27217,3170,256,yes,16.13,0.91
+chacha_c,ChaCha20 (C),757.8,757.76,229,4202,44,yes,65.0,8.58
+chacha_fast,ChaCha20 (byte rotations),757.8,757.76,229,4202,44,yes,65.0,8.58

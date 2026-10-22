@@ -1,0 +1,2 @@
+   text	   data	    bss	    dec	    hex	filename
+   1474	      0	    384	   1858	    742	build/present_naive/size.elf

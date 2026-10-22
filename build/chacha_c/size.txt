@@ -1,0 +1,2 @@
+   text	   data	    bss	    dec	    hex	filename
+   4424	     12	    160	   4596	   11f4	build/chacha_c/size.elf

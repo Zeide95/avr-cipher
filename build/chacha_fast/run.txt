@@ -1,0 +1,3 @@
+Loaded 4706 .text at address 0x0
+Loaded 12 .data
+RESULT setup=229 enc=96998 dec=96993 flags=3 total=248908

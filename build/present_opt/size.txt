@@ -1,0 +1,2 @@
+   text	   data	    bss	    dec	    hex	filename
+   3404	      0	    384	   3788	    ecc	build/present_opt/size.elf

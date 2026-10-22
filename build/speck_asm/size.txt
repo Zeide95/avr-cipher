@@ -1,0 +1,2 @@
+   text	   data	    bss	    dec	    hex	filename
+   1778	      0	    236	   2014	    7de	build/speck_asm/size.elf

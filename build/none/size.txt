@@ -1,0 +1,2 @@
+   text	   data	    bss	    dec	    hex	filename
+    234	      0	    128	    362	    16a	build/none/size.elf

@@ -1,0 +1,4 @@
+cipher,total_rounds,best_attack_rounds,attack_type,source
+speck,27,20,differential key recovery on Speck64/128 (time ~2^125.56; barely below brute force),https://en.wikipedia.org/wiki/Speck_(cipher)
+present,31,26,truncated differential / multidimensional linear on PRESENT-80 (biclique claims on the full cipher gain only a few bits),https://en.wikipedia.org/wiki/PRESENT
+chacha,20,7,chosen-IV differential-linear key recovery on ChaCha7 (time ~2^239 vs 2^256 brute force; later papers improve it),https://eprint.iacr.org/2015/698
