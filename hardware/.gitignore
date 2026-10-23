@@ -1,0 +1,4 @@
+# Copies made by hardware/tools/sync_sources.sh (source of truth is /src)
+arduino/cipher_bench/*.c
+arduino/cipher_bench/*.S
+arduino/cipher_bench/*.h
