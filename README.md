@@ -11,19 +11,14 @@ the simulator counts cycles exactly, the board measures wall-clock time with `mi
 ```
 hardware/
 ├── README.md                      this file
-├── .gitignore                     ignores the copies made by sync_sources.sh
 ├── arduino/
 │   └── cipher_bench/
-│       └── cipher_bench.ino       the sketch (only file in this folder that is tracked by git)
-├── tools/
-│   └── sync_sources.sh            copies ../src/* into the sketch folder (see "Why a sync script")
+│       └── cipher_bench.ino       the sketch
+|       └── ...                    cipher codes
 └── results/
-    └── first_run.md    recorded board runs
+    └── first_run.md               recorded board runs
     └── second_run.md
 ```
-
-The cipher code is **not duplicated in git**: `../src` is the single source of truth, and
-`sync_sources.sh` makes throw-away copies next to the sketch.
 
 ## Requirements
 
@@ -34,8 +29,7 @@ The cipher code is **not duplicated in git**: `../src` is the single source of t
 ## Quick start
 
 ```bash
-git checkout -b hardware-arduino          # branch for this work
-hardware/tools/sync_sources.sh            # copy the sources into the sketch folder
+git checkout -b hardware          # branch for this work
 ```
 
 **Arduino IDE:** open `hardware/arduino/cipher_bench/cipher_bench.ino` → *Tools → Board → Arduino Uno*
@@ -52,7 +46,6 @@ arduino-cli monitor -p /dev/ttyUSB0 -c baudrate=115200
 ```
 
 The port is `/dev/ttyACM0` on most Uno boards and `/dev/ttyUSB0` on most Nano clones.
-Re-run `sync_sources.sh` after every change in `../src`.
 
 ## What you should see
 
@@ -94,24 +87,16 @@ DONE
   (`make bench`). Stack usage is not measured anywhere yet.
 * Rely on the **ranking and the order of magnitude**, and take exact values from the simulator.
 
-## Why a sync script?
-
-1. The Arduino IDE builds only files that are inside the sketch folder.
-2. It silently ignores `*.inc` files, which gave `present_key.inc: No such file or directory`.
-   The script copies `present_key.inc` as `present_key.h` and patches the `#include` lines in the **copies**.
-3. The copies are git-ignored, so `src/` is never duplicated in the repository.
-
 ## Recording results
 
-Copy the serial output into `results/YYYY-MM-DD_<board>.md` together with: board model, clock, IDE or
+Copy the serial output into `results/<board>.md` together with: board model, clock, IDE or
 `arduino-cli` version, compiler flags, and the git commit (`git rev-parse --short HEAD`).
-`results/2026-10-23_first_run.md` is the template.
+`results/first_run.md` is the template.
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---|---|
-| `present_key.inc: No such file or directory` | run `hardware/tools/sync_sources.sh` (it creates `present_key.h`) |
 | `speck.h: No such file or directory` | the sketch folder is empty: run the sync script; the folder name must equal the `.ino` name |
 | `Permission denied` on `/dev/ttyUSB0` | `sudo usermod -aG dialout $USER`, log out and in |
 | `stk500_getsync(): not in sync` | wrong board or port; on a Nano choose *ATmega328P (Old Bootloader)* |
@@ -122,6 +107,6 @@ Copy the serial output into `results/YYYY-MM-DD_<board>.md` together with: board
 
 * `chacha_c` and `chacha_fast` gave **identical** times in the first run. Likely the compiler turned both rotation
   styles into the same code. Check with `avr-objdump -d` or compare the two variants in the simulator (`make bench`).
-* Compare the board numbers with `results/results.md` from the simulator branch and explain any difference
+* Compare the board numbers with `results/results.md` from the main branch and explain any difference
   larger than a few percent (optimisation level first).
 * Optional: cycle-exact timing with Timer1 (prescaler 1) or a GPIO pulse measured with a logic analyser.
